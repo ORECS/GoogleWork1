@@ -25,6 +25,8 @@ class VideoPlayer {
   void numberOfVideos();
   void showAllVideos();
   void playVideo(const std::string& videoId);
+  std::string CurrentVideo;
+  int Paused;
   void stopVideo();
   void playRandomVideo();
   void pauseVideo();

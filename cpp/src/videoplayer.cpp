@@ -8,35 +8,107 @@ void VideoPlayer::numberOfVideos() {
 }
 
 void VideoPlayer::showAllVideos() {
-  std::cout << "showAllVideos needs implementation" << std::endl;
+    std::cout << "Here's a list of all available videos: " << std::endl;
+    for (auto n : mVideoLibrary.getVideos()) {
+
+        std::cout << n.getTitle() << " " << "(" << n.getVideoId()<< ")" << " ";
+        std::cout << "[";
+        for (auto i : n.getTags()) {
+            std::cout << i << "";
+        }
+        std::cout << "]";
+        std::cout << std::endl;
+    }
+    
 }
 
 void VideoPlayer::playVideo(const std::string& videoId) {
-  std::cout << "playVideo needs implementation" << std::endl;
+
+    //std::cout << "playVideo needs implementation" << std::endl;
+    if (CurrentVideo.empty()) {
+        CurrentVideo = mVideoLibrary.getVideo(videoId)->getTitle();
+        std::cout << "Playing video: " << CurrentVideo << std::endl;
+    }
+    else {
+
+        char* temp;
+        temp = (char*)malloc(sizeof(char) * 3);
+        std::cout << "Video currently playing, Would you like to stop?" << std::endl;
+        std::cout << "Type y for yes or N for no" << std::endl;
+
+        std::cin >> temp;
+
+        if (*temp == 'y' || *temp == 'Y') {
+            std::cout << "Stopping video: " << CurrentVideo <<std::endl;
+            CurrentVideo = mVideoLibrary.getVideo(videoId)->getTitle();
+            std::cout << "Playing video: " << CurrentVideo << std::endl;
+            return;
+
+        }
+        else if (*temp == 'n' || *temp == 'N') {
+            std::cout << "resuming " << CurrentVideo << std::endl;
+            return;
+
+        }
+
+    }
+
 }
 
 void VideoPlayer::stopVideo() {
-  std::cout << "stopVideo needs implementation" << std::endl;
+    
+   if (!CurrentVideo.empty()) {
+       std::cout << "Stopping video: " << CurrentVideo << std::endl;
+        CurrentVideo.clear();
+        
+    }
+    else if(CurrentVideo.empty()) {
+       std::cout << "Cannot stop video: No video is currently playing" << std::endl;
+        
+    }
+  //std::cout << "stopVideo needs implementation" << std::endl;
 }
 
 void VideoPlayer::playRandomVideo() {
-  std::cout << "playRandomVideo needs implementation" << std::endl;
+
+  //std::cout << "playRandomVideo needs implementation" << std::endl;
 }
 
 void VideoPlayer::pauseVideo() {
-  std::cout << "pauseVideo needs implementation" << std::endl;
+    
+    if (!CurrentVideo.empty()) {
+        std::cout << "Pausing video: " << CurrentVideo << std::endl;
+        return;
+        
+    }
+    
+    else if (CurrentVideo.empty()) {
+        std::cout << "No video is currently playing" << std::endl;
+        
+    }
+    
+   
+  //std::cout << "pauseVideo needs implementation" << std::endl;
 }
 
 void VideoPlayer::continueVideo() {
-  std::cout << "continueVideo needs implementation" << std::endl;
+
+   
+  //std::cout << "continueVideo needs implementation" << std::endl;
 }
 
 void VideoPlayer::showPlaying() {
-  std::cout << "showPlaying needs implementation" << std::endl;
+    std::cout << "Currently playing: " << CurrentVideo << std::endl;
+    
+    
+    
+
+  //std::cout << "showPlaying needs implementation" << std::endl;
 }
 
 void VideoPlayer::createPlaylist(const std::string& playlistName) {
-  std::cout << "createPlaylist needs implementation" << std::endl;
+
+  //std::cout << "createPlaylist needs implementation" << std::endl;
 }
 
 void VideoPlayer::addVideoToPlaylist(const std::string& playlistName,
